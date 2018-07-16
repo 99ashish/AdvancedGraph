@@ -1,20 +1,18 @@
 package com.jda.core;
-
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FileWriter;
-import java.util.ArrayList;
-import java.util.List;
 import com.jda.utility.AlgorithmUtility;
 import com.jda.Utility.CustomLinkedList;
-
+/**
+ * Read from file the list of Words and take user input to search a Text.
+ * The List of Words to a File.
+ *
+ */
 public class LinkedList {
-
 	public static void main(String[] args) throws Exception {
 		CustomLinkedList list = new CustomLinkedList();
+		System.out.println("Enter the exact path to read the file");
 		String fileName = AlgorithmUtility.getString();
 		File file = new File(fileName);
 		BufferedReader br = new BufferedReader(new FileReader(file));
@@ -40,6 +38,6 @@ public class LinkedList {
 		}
 	
 	list.writeToFile(fileName);
+	System.out.println("File " + fileName +"  updated successfully" );
 	}
-
 }

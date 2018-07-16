@@ -1,9 +1,16 @@
 package com.jda.Utility;
-
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
+/**
+ *Read the Text from a file, split it into words and arrange it as Linked List.
+ *Take a user input to search a Word in the List. If the Word is not found then add it
+ *to the list, and if it found then remove the word from the List. In the end save the
+ *list into a file.
+ *Create a Unordered Linked List. The Basic Building Block is the Node
+ *Object. Each node object must hold at least two pieces of information. One ref to
+ *the data field and second the ref to the next node object.
+ *
+ */
 public class CustomLinkedList {
 	static int size = 0;
 	String data;
@@ -62,7 +69,7 @@ public class CustomLinkedList {
 	{
 		if(head==null)
 			return -1;
-		if(head.data==str)
+		if(str.equals(head.data))
 			return 0;
 		CustomLinkedList list=head;
 		int cnt=0;

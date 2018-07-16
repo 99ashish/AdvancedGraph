@@ -1,0 +1,41 @@
+package com.jda.Utility;
+
+public class OrderedLinkedList {
+	static int size = 0;
+	int data;
+	OrderedLinkedList link;
+	public static OrderedLinkedList head;
+	public static OrderedLinkedList end;
+	public int search(int val)
+	{
+		if(head==null)
+			return -1;
+		if(val==head.data)
+			return 0;
+		OrderedLinkedList list=head;
+		int cnt=0;
+		while(list!=null)
+		{
+			cnt++;
+			if(val==list.data )
+				return cnt;
+			list=list.link;
+		}
+		return -1;
+	}
+public boolean isEmpty()
+{
+	if(size==0)
+		return true;
+	return false;
+}
+public int sizeOfLinkedList()
+{
+	return size;
+}
+public void append(int val)
+{
+	add(val);
+}
+
+}

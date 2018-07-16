@@ -1,0 +1,40 @@
+package com.jda.Utility;
+
+public class Queue {
+	static int size = 0;
+	String name;
+	public static Queue front;
+	public static Queue back;
+	Queue link;
+
+	public void push(String val) {
+		size++;
+		if (front == null) {
+			Queue node = new Queue();
+			node.name = val;
+			front = node;
+			back = node;
+		} else {
+			Queue node = new Queue();
+			node.name = val;
+			back.link = node;
+			back = node;
+		}
+	}
+
+	public void deque() {
+		size--;
+		front = front.link;
+	}
+
+	public boolean isEmpty() {
+		if (size > 0)
+			return false;
+		return true;
+	}
+
+	public int size() {
+		return size;
+	}
+
+}

@@ -1,0 +1,59 @@
+package com.jda.core;
+import com.jda.Utility.Queue;
+import com.jda.utility.AlgorithmUtility;
+public class QueueImplementation {
+
+	public static void main(String[] args) {
+		Queue que= new Queue();
+		while(true)
+		{
+			System.out.println("1.Enque");
+			System.out.println("2.Deque");
+			int opt=AlgorithmUtility.getInteger();
+			AlgorithmUtility.getString();
+			if(opt==1)
+			{
+				System.out.println("Account holder name");
+				que.push(AlgorithmUtility.getString());
+			}
+			else if(opt==2 && !que.isEmpty())
+			{
+				System.out.println("Select your task");
+				System.out.println("1.Withdraw");
+				System.out.println("2.Deposite");
+				System.out.println("3.Balance Enquiry");
+				int option=AlgorithmUtility.getInteger();
+				if(option==1)
+				{
+					 System.out.println("Enter the amount");
+					 int amnt=AlgorithmUtility.getInteger();
+					 if(amnt<=0)
+					 {
+						 System.out.println("Invalid amount: "+ amnt);
+						 continue;
+					 }
+					 que.withDraw(amnt);
+				}
+				else if(option==2)
+				{
+					 System.out.println("Enter the amount");
+					 int amnt=AlgorithmUtility.getInteger();
+					 if(amnt<=0)
+					 {
+						 System.out.println("Invalid amount: "+ amnt);
+						 continue;
+					 }
+					 deposite(amnt);
+				}
+					int amnt=que.balEnquiry();
+					System.out.println("Current account balance is : "+ amnt);
+				String name=que.deque();
+			}
+			else
+				System.out.println("invalid Entry!");
+		}
+		
+
+	}
+
+}

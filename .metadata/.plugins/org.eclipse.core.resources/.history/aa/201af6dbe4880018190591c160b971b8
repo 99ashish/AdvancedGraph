@@ -1,0 +1,62 @@
+package com.jda.Utility;
+
+import java.util.HashSet;
+import java.util.Set;
+
+public class Queue {
+	public static Set<Integer> accountNo= new HashSet<>();
+	static int id=23123;
+	static int size = 0;
+	String name;
+	int amount=20000;
+	int uniqueId;
+	public static Queue front;
+	public static Queue back;
+	Queue link;
+	public void push(String val) 
+	{
+		uniqueId=id;
+		accountNo.add(uniqueId);
+		id++;
+		Queue node = new Queue();
+		node.name = val;
+		if (size==0) {
+			front = node;
+			back = node;
+		} else {
+			front.link = node;
+			front = node;
+		}
+		size++;
+	}
+public int getBal()
+	{
+		return amount;
+	}
+public void withDraw(int amnt)
+{
+	amount-=amnt;
+}
+public void deposite(int amnt)
+{
+	amount+=amnt;
+}
+	public String  deque() {
+		if(back==null)
+			return null;
+		size--;
+		String ch=back.name;
+		back = back.link;
+		return ch;
+	}
+
+	public boolean isEmpty() {
+		if (size == 0)
+			return true;
+		return false;
+	}
+	public int sizeOfQueue() {
+		return size;
+	}
+
+}
