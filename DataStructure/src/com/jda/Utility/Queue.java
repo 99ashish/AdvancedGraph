@@ -48,9 +48,9 @@ public void deposite(int amnt)
 	public String  deque() {
 		if(back==null)
 			return null;
-		size--;
 		String ch=back.name;
 		back = back.link;
+		size--;
 		return ch;
 	}
 

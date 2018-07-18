@@ -10,8 +10,10 @@ import com.jda.utility.AlgorithmUtility;
  * @author bridgelabz
  *
  */
-public class ParentesisBalance {
-	public static void main(String[] args) {
+public class ParentesisBalance
+{
+	public static void main(String[] args) 
+	{
 		Stack stk=new Stack();
 		System.out.println("Enter the equation");
 		String str= AlgorithmUtility.getString();

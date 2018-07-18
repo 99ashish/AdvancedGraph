@@ -7,8 +7,10 @@ import com.jda.utility.AlgorithmUtility;
  * to the queue, and when one customer done their job pop out from the queue.
  *
  */
-public class QueueImplementation {
-	public static void main(String[] args) {
+public class QueueImplementation
+{
+	public static void main(String[] args) 
+	{
 		Queue que= new Queue();
 		while(true)
 		{

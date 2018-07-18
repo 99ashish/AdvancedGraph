@@ -1,9 +1,10 @@
 package com.jda.core;
 import com.jda.Utility.Deque;
 import com.jda.utility.AlgorithmUtility;
-public class DequeProgram {
-
-	public static void main(String[] args) {
+public class DequeProgram
+{
+	public static void main(String[] args) 
+	{
 		System.out.println("Enter the string");
 		String str=AlgorithmUtility.getString();
 		Deque dq= new Deque();

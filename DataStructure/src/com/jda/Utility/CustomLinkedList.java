@@ -11,29 +11,33 @@ import java.io.IOException;
  *the data field and second the ref to the next node object.
  *
  */
-public class CustomLinkedList {
+public class CustomLinkedList
+{
 	static int size = 0;
 	String data;
 	CustomLinkedList link;
 	public static CustomLinkedList head;
 	public static CustomLinkedList end;
-
-	public void add(String str) {
+	public void add(String str)
+	{
 		size++;
-		if (head == null) {
+		if (head == null) 
+		{
 			CustomLinkedList node = new CustomLinkedList();
 			node.data = str;
 			head = node;
 			end = node;
-		} else {
+		} 
+		else
+		{
 			CustomLinkedList node = new CustomLinkedList();
 			node.data = str;
 			end.link = node;
 			end = node;
 		}
 	}
-
-	public void remove(String str) {
+	public void remove(String str) 
+	{
 		CustomLinkedList list = head;
 		CustomLinkedList prev = list;
 		if (head.data == str)
@@ -43,8 +47,10 @@ public class CustomLinkedList {
 		}
 		else 
 		{
-			while (list != null) {
-				if (list.data == str) {
+			while (list != null) 
+			{
+				if (list.data == str) 
+				{
 					prev.link = list.link;
 					if(list==end)
 						end=prev;
@@ -59,9 +65,11 @@ public class CustomLinkedList {
 	{
 		 FileWriter fw=new FileWriter(fileName);    
 		 CustomLinkedList list = head;
-			while (list != null) {	
-         fw.write(list.data +","); 
-         list = list.link;
+		while (list != null) 
+			{	
+			System.out.print(list.data+ " ");
+           fw.write(list.data +","); 
+           list = list.link;
 			}
 			fw.close();
 	}
@@ -143,7 +151,8 @@ public void insert(int pos, String str)
 public String pop()
 {
 	if(head==null)
-	{size--;
+	{
+		size--;
 		return null;
 	}
 	CustomLinkedList list=head;

@@ -80,18 +80,20 @@ public void append(int val)
 {
 	add(val);
 }
-public void add(int val) {
+public void add(int val)
+{
 	size++;
-	if (head == null) {
+	if (head == null) 
+	{
 		OrderedLinkedList node = new OrderedLinkedList();
 		node.data = val;
 		head = node;
 		end = node;
-	} else {
-		
+	}
+	else
+	{	
 		OrderedLinkedList list=head;
-		OrderedLinkedList prev=head;
-		
+		OrderedLinkedList prev=head;	
 		while(list!=null)
 		{
 			if(val<list.data)
@@ -104,8 +106,7 @@ public void add(int val) {
 			addFront(list, val);
 			return;
 		}
-		addMidAndLast(prev,list,val);
-		
+		addMidAndLast(prev,list,val);		
 	}
 }
 private void addFront(OrderedLinkedList list,int val)
