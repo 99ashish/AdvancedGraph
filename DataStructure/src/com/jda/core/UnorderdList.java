@@ -2,8 +2,8 @@ package com.jda.core;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import com.jda.utility.AlgorithmUtility;
 import com.jda.Utility.CustomLinkedList;
+import com.jda.utility.AlgorithmUtility;
 /**
  * Read from file the list of Words and take user input to search a Text.
  * The List of Words to a File.

@@ -27,7 +27,7 @@ public class Calender {
 				if (i == 1 && strtDay > j)
 					cal[i][j] = "            ";
 				else {
-					if (cntDay < totDay + strtDay) {
+					if (cntDay <=totDay ) {
 						if (cntDay < 10)
 							cal[i][j] = String.valueOf((cntDay++) + "          ");
 						else

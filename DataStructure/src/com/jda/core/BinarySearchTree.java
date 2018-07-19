@@ -1,5 +1,7 @@
 package com.jda.core;
+
 import com.jda.utility.AlgorithmUtility;
+
 public class BinarySearchTree 
 {
 	public static void main(String[] args) 
@@ -25,5 +27,4 @@ public class BinarySearchTree
 			System.out.println("Total bst is "+ totBst[size]);
 		}
 	}
-
 }

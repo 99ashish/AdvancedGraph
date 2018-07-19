@@ -1,6 +1,5 @@
 package com.jda.core;
 import com.jda.Utility.Queue;
-import com.jda.utility.AlgorithmUtility;
 public class StackWithTwoQueue
 {
 	public static void main(String[] args)

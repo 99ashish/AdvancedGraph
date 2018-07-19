@@ -1,6 +1,8 @@
 package com.jda.core;
+
 import com.jda.Utility.Deque;
 import com.jda.utility.AlgorithmUtility;
+
 public class DequeProgram
 {
 	public static void main(String[] args) 

@@ -7,7 +7,8 @@ import java.util.HashSet;
 import java.util.Set;
 import com.jda.Utility.CustomLinkedList;
 import com.jda.Utility.OrderedLinkedList;
-import com.jda.utility.AlgorithmUtility;;
+import com.jda.utility.AlgorithmUtility;
+
 public class HashingFunction 
 {
 	public static void main(String[] args) {

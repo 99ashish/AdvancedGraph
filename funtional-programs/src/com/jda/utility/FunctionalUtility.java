@@ -2,6 +2,15 @@ package com.jda.utility;
 import  java.util.Scanner;
 public class FunctionalUtility {
 	static Scanner sc = new Scanner(System.in);
+	public static  boolean primeChecker(int val)
+	{
+	for(int i=2; i*i<=val; i++)
+	{
+		if(val%i ==0 )
+			return false;
+	}
+	return true;
+    }
 	public static int getInteger()
 	{
 	String getval=sc.next();

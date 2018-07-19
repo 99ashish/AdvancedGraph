@@ -6,12 +6,12 @@ package com.jda.Utility;
  *
  */
 public class Stack {
-	char data;
+	String data;
 	Stack next;
 	Stack prev;
 	static int size =0;
 	public static Stack top;
-	public void push(char val)
+	public void push(String val)
 	{
 		size++;
 		if (top == null) {
@@ -26,7 +26,7 @@ public class Stack {
 			top=node;
 		}
 	}
-	public char peek()
+	public String peek()
 	{
 		return top.data;
 	}
