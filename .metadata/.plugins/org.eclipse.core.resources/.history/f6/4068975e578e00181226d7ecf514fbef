@@ -1,0 +1,10 @@
+package com.jda.advanced_core;
+
+public class JsonFileWriter {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

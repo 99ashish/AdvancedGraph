@@ -1,0 +1,33 @@
+package com.jda.advanced_utility;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+public class AddressBook implements Comparable<Person>{
+	List<Person> personList = new ArrayList<>();
+
+	public void add(Person p)
+	{
+		personList.add(p);
+	}
+	public void remove(Person p)
+	{
+		personList.remove(p);
+	}
+	public List<Person>  sortByName(List<Person> personList)
+	{
+		Collections.sort(personList);
+		return personList;
+	}
+	public List<Person>  sortByZipCode(List<Person> personList)
+	{
+		Collections.sort(personList);
+		return personList;
+	}
+	@Override
+	public int compareTo(Person o) {
+		// TODO Au
+		return 0;
+	}
+
+}

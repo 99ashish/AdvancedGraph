@@ -1,0 +1,48 @@
+package com.jda.core;
+import java.util.Comparator;
+import java.util.Scanner;
+class person<T>
+{
+	T age;
+	T name;
+	public void setAge(T age){this.age=age;}
+	public void setName(T name){this.name=name;}
+	public T getAge(){return this.age;}
+	public T setAge(){return this.name;}
+}
+
+public class GenericSort{
+	public static <T> int compare(T a,T b)
+	{
+		return 
+	}
+	public static<T extends Comparable<T>> void sort(T[] arr,int len)
+	{
+		for(int i=0;i<len;i++)
+		{
+			T key=arr[i];
+			int j;
+			for( j=i-1; j>=0 && compare(arr[j],key)>0 ; j--)
+				arr[j+1]=arr[j];
+			arr[j+1]=key;
+		}
+	}
+	public static void main(String[] args)
+	{
+		Scanner sc=new Scanner(System.in);
+		person[] emp=new person[3];
+		for(int i=0;i<3;i++)
+		{
+			emp[i]=new person();
+			int k=sc.nextInt();
+			sc.nextLine();
+			emp[i].setAge(k);
+			emp[i].setName(sc.nextLine());
+		}
+		sort(emp,3);
+		for(int i=0;i<3;i++)
+		{
+            System.out.println(emp[i].age+ " "+ emp[i].name);
+		}
+    }
+}
