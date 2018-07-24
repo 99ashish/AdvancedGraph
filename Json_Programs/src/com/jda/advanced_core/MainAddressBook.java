@@ -1,12 +1,9 @@
 package com.jda.advanced_core;
-
-import com.jda.advanced_utility.Person;
-import com.jda.advanced_utility.AddressBook;
 import com.jda.advanced_utility.Input;
-
+import com.jda.advanced_utility.ManagerAddressBook;
 public class MainAddressBook {
 	
-	private static AddressBook addressBook = null;
+	private static ManagerAddressBook managerAddressBook = null;
 	
 	public static void main(String[] args) {
 		
@@ -18,29 +15,23 @@ public class MainAddressBook {
 			System.out.println("5. Save as.....");
 			int opt = Input.getInteger();
 			Input.getString();
-
+			managerAddressBook = new ManagerAddressBook();
 			switch (opt) {
 			case 1:
-				System.out.println("Enter the name of the Address Book");
-				String nameOfAddressBook = Input.getString();
-				addressBook = new AddressBook(nameOfAddressBook);
-				addressBook.createFile();
+				managerAddressBook.createFile();
 				break;
 			case 2:
-				AddressBook.showTotalJsonFile();
-				System.out.println("Enter the name of the Existing Address Book");
-				String nameOfOpeningAddressBook = Input.getString();
-				addressBook = new AddressBook(nameOfOpeningAddressBook);
-				addressBook.openFunction(addressBook);
+				managerAddressBook.open();
+				break;
 			case 3:
-				// addressBook.save();
-				// addressBook.closeAddressBook();
+				 managerAddressBook.close();
 				break;
 			case 4:
-				addressBook.save();
+				managerAddressBook.save();
 				break;
 			case 5:
-				// addressBook.saveAs();
+				// managerAddressBook.saveAs();
+				 break;
 			}
 		}
 	}
