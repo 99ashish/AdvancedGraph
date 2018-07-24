@@ -1,0 +1,11 @@
+package com.jda.advanced_core;
+import com.jda.advanced_utility.Person;
+import com.jda.advanced_utility.AddressBook;
+
+public class ManagerAddressBook {
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

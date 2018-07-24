@@ -1,0 +1,14 @@
+package com.jda.advanced_core;
+import com.jda.advanced_utility.Person;
+import com.jda.advanced_utility.AddressBook;
+import com.jda.advanced_utility.Input;
+public class ManagerAddressBook {
+	public static void main(String[] args) {
+		while(true)
+		{
+		     System.out.println("1. Create New Address Book");
+		     System.out.println("2. Open Existing Address Book");
+		}
+	}
+
+}

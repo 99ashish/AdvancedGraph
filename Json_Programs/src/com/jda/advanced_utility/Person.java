@@ -11,26 +11,30 @@ private int  zipCode;
 public String getFirstName() {
 	return firstName;
 }
-public void setFirstName(String firstName) {
+public Person setFirstName(String firstName) {
 	this.firstName = firstName;
+	return this;
 }
 public String getLastName() {
 	return lastName;
 }
-public void setLastName(String lastName) {
+public Person setLastName(String lastName) {
 	this.lastName = lastName;
+	return this;
 }
 public String getAddress() {
 	return address;
 }
-public void setAddress(String address) {
+public Person setAddress(String address) {
 	this.address = address;
+	return this;
 }
 public long getMobileNumber() {
 	return mobileNumber;
 }
-public void setMobileNumber(long mobileNumber) {
+public Person setMobileNumber(long mobileNumber) {
 	this.mobileNumber = mobileNumber;
+	return this;
 }
 public int getZipCode() {
 	return zipCode;

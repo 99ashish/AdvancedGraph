@@ -1,0 +1,138 @@
+package com.jda.advanced_utility;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.io.*;
+/**
+ * Address Book class for the Address book manager. It have different -2 method for sorting 
+ * data like- sort by firstname, Zipcode and etc. For adding person into the address book we
+ * have method add and for removing person from the address book we have remove method 
+ * which directly remove person from the address book.
+ *
+ */
+public class AddressBook{
+	String addressBookName;
+	List<Person> personList = new ArrayList<>();
+  //System.out.println("1.Add");
+
+	public AddressBook(String addressBookName){
+		this.addressBookName=addressBookName;
+	}
+	public void add(Person p)
+	{
+		personList.add(p);
+	}
+	public void remove(Person p)
+	{
+		personList.remove(p);
+	}
+	public List<Person>  sortByName(List<Person> personList)
+	{
+		Collections.sort(personList,byName);
+		return personList;
+	}
+	public void editPersonDetail(int idx,Person p)
+	{
+		personList.set(idx,p);
+	}
+	public List<Person>  sortByZipCode(List<Person> personList)
+	{
+		Collections.sort(personList,byZipCode);
+		return personList;
+	}
+	public void openFunction(AddressBook NameOfOpenedAddressBook)
+	{
+		System.out.println("1.Add"+ "\n" + "2.Edit" + "\n" + "3.Delete" +"\n" +"4.Sort By Name" + "\n" + "Sort By Zip");
+		int opt=Input.getInteger();
+		 int len=personList.size(),idx=-1;
+		  switch(opt) 
+		  {
+		  case 1:
+			          Person p1= new Person();
+			          System.out.println("First name");
+		              p1.setFirstName(Input.getString());
+		              System.out.println("Last name");
+		              p1.setLastName(Input.getString());
+		              System.out.println("Address");
+		              p1.setAddress(Input.getString());
+		              System.out.println("City");
+		              p1.setCity(Input.getString());
+		              System.out.println("Zip");
+		              p1.setZipCode(Input.getInteger());
+		              System.out.println("Mobile Number");
+		              p1.setMobileNumber(Input.getLong());
+		              personList.add(p1);
+		              break;
+		  case 2:
+			         System.out.println("Enter the first and last name of the person");
+			         String firstName=Input.getString();
+			         String lastName=Input.getString();
+			         Person p = null;
+			         for(int i=0;i<len;i++)
+			         {
+			        	 if(personList.get(i).getFirstName()==firstName && personList.get(i).getLastName()==lastName)
+			        	 {
+			        		 idx=i;
+			        		 p=personList.get(i);
+			        	 }
+			         }
+			         if(idx>=0)
+			         {
+			            System.out.println("1.FirstName" +"\n" + "2.LastName" + "\n" +"3.address" + "\n" + "4.Moblie number");
+			            int opt1=Input.getInteger();
+			              switch(opt1)
+			             {
+			              case 1:
+				                      System.out.println("First Name");
+				                      personList.set(idx, p.setFirstName(Input.getString()));
+				                      break;
+			              case 2:
+			            	        System.out.println("Last Name");
+			            	        personList.set(idx, p.setLastName(Input.getString()));
+			            	        break;
+			              case 3:
+			            	       System.out.println("Address");
+		            	           personList.set(idx, p.setAddress(Input.getString()));
+		            	           break;
+			              case 4:
+			            	       System.out.println("Moblie Number");
+		            	            personList.set(idx, p.setMobileNumber(Input.getLong()));
+		            	            break;
+		            	 default: 
+		            		 System.out.println("worng Entery");
+			            }
+			         }
+			         else
+			        	 System.out.println("Person not exist");
+			             break;
+		  case 3:
+			         System.out.println("Enter the first and last name of person");
+			         String deleteFirstName=Input.getString();
+			         String deleteLastName=Input.getString();
+			         Person person = null;
+			         for(int i=0;i<len;i++)
+			         {
+			        	 if(personList.get(i).getFirstName()==deleteFirstName && personList.get(i).getLastName()==deleteLastName)
+			        	 {
+			        		 person=personList.get(i);
+			        	 }
+			         }
+			         personList.remove(person);
+			         
+		  }
+	}
+	Comparator<Person> byName=new Comparator<Person>() {
+		 public int compare(Person p1, Person p2) {
+			 if(p1.getLastName().equals(p2.getLastName()))
+				 return p1.getFirstName().compareTo(p2.getFirstName());
+	           return p1.getLastName() .compareTo( p2.getLastName());
+	       }
+	};
+	Comparator<Person> byZipCode=new Comparator<Person>() {
+		 public int compare(Person p1, Person p2) {
+	          return p1.getZipCode() -( p2.getZipCode());
+	      }
+	};
+}

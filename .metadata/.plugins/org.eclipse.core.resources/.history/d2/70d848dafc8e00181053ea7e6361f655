@@ -1,0 +1,17 @@
+package com.jda.advanced_utility;
+import java.util.Scanner;
+public class Input {
+Scanner sc=new Scanner(System.in);
+public int getInteger()
+{
+	return sc.nextInt();
+}
+public long getLong()
+{
+	return sc.nextLong();
+}
+public String getString()
+{
+	return sc.nextLine();
+}
+}

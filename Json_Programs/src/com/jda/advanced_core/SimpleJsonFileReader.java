@@ -10,7 +10,7 @@ public class SimpleJsonFileReader {
 		 JSONParser parser = new JSONParser();
 		// TODO Auto-generated method stub
 		 try{
-		JSONArray a = (JSONArray) parser.parse(new FileReader("/home/bridgelabz/Desktop/java-programs/data.json"));
+		JSONArray a = (JSONArray) parser.parse(new FileReader("/home/bridgelabz/Desktop/java-programs/data1.json"));
 
 		  for (Object o : a)
 		  {

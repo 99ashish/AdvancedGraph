@@ -6,7 +6,6 @@ import java.io.IOException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 public class JsonFileWriter {
-
 	public static void main(String[] args) {
 		 JSONObject countryObj = new JSONObject();  
 	        countryObj.put("Name", "USA");  
@@ -17,7 +16,7 @@ public class JsonFileWriter {
 	        listOfStates.add("Las vegas");  
 	        countryObj.put("States", listOfStates);  
 		try{
-		            File file=new File("JsonFile.json");  
+		            File file=new File("/home/bridgelabz/JsonFile1.json");  
 		            file.createNewFile();  
 		            FileWriter fileWriter = new FileWriter(file);  
 		            System.out.println("Writing JSON object to file");  
