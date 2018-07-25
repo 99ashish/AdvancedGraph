@@ -18,35 +18,40 @@ import java.io.*;
  * address book.
  *
  */
-public class AddressBook {
+public class AddressBook 
+{
 	String addressBookName;
 	List<Person> personList = new ArrayList<>();
-    public void addPerson()
+	private static Input get =Input.getInputInstance();
+    // Add a new person in the address book 
+	public void addPerson()
     {
     	Person p1 = new Person();
 		System.out.println("First name");
-		p1.setFirstName(Input.getString());
+		p1.setFirstName(get.sc.nextLine());
 		System.out.println("Last name");
-		p1.setLastName(Input.getString());
+		p1.setLastName(get.sc.nextLine());
 		System.out.println("Address");
-		p1.setAddress(Input.getString());
+		p1.setAddress(get.sc.nextLine());
 		System.out.println("City");
-		p1.setCity(Input.getString());
+		p1.setCity(get.sc.nextLine());
 		System.out.println("state");
-		p1.setState(Input.getString());
+		p1.setState(get.sc.nextLine());
 		System.out.println("Zip");
-		p1.setZipCode(Input.getInteger());
+		p1.setZipCode(get.sc.nextInt());
 		System.out.println("Mobile Number");
-		p1.setMobileNumber(Input.getLong());
+		p1.setMobileNumber(get.sc.nextLong());
 		personList.add(p1);
     }
+	// Edit person detail in the address book.
     public void editPerson()
     {
-    	int len=personList.size(),idx=-1;
+    	int len=personList.size();
+    			int idx=-1;
     	System.out.println("first name");
-		String firstName = Input.getString();
+		String firstName = get.sc.nextLine();
 		System.out.println("last name");
-		String lastName = Input.getString();
+		String lastName = get.sc.nextLine();
 		for (int i = 0; i < len; i++) {
 			if (personList.get(i).getFirstName().equals( firstName) && personList.get(i).getLastName().equals( lastName)) {
 				idx = i;
@@ -59,34 +64,36 @@ public class AddressBook {
 		}
 		System.out.println("Person not exist");
     }
+    // Update address book of the person.
     private void updateAddress(int idx)
     {
     	Person p=personList.get(idx);
     	System.out.println("New Address");
-    	personList.set(idx, p.setAddress(Input.getString()));
-    	
+    	personList.set(idx, p.setAddress(get.sc.nextLine()));	
     }
+    //Update mobile number of the person.
     private void updateMobileNumber(int idx)
     {
     	Person p=personList.get(idx);
     	System.out.println("New Mobile Number");
-    	p.setMobileNumber(Input.getLong());
-    	personList.set(idx, p);
-    	
+    	p.setMobileNumber(get.sc.nextInt());
+    	personList.set(idx, p);	
     }
+    //Update Zip code of the person in address book.
     private void updateZipCode(int idx)
     {
     	Person p=personList.get(idx);
     	System.out.println("New Zip Code");
-    	p.setZipCode(Input.getInteger());
+    	p.setZipCode(get.sc.nextInt());
     	personList.set(idx, p); 		
     }
+    // Editable option which is provided to manager of address book.
     private void editableOption(int idx)
     {
 			System.out.println(
 					 "1.Update Address" + "\n" + "2.Update Moblie number" + "\n" + "3.Update Zip Code");
-			int opt1 = Input.getInteger();
-			Input.getString();
+			int opt1 = get.sc.nextInt();
+			get.sc.nextLine();
 			switch (opt1) {
 			case 1:
 				updateAddress(idx);
@@ -101,90 +108,31 @@ public class AddressBook {
 				System.out.println("worng Entery");
 			}
 		}
+    //Delete a person from address book.
     public void deletePerson()
     {
 		System.out.println("Enter the first and last name of person");
-		String deleteFirstName = Input.getString();
-		String deleteLastName = Input.getString();
-		Person person = null;
+		String deleteFirstName = get.sc.nextLine();
+		String deleteLastName = get.sc.nextLine();
 		int len=personList.size();
 		for (int i = 0; i < len; i++) {
-			if (personList.get(i).getFirstName() == deleteFirstName
-					&& personList.get(i).getLastName() == deleteLastName) {
-				person = personList.get(i);
+			if (personList.get(i).getFirstName() .equalsIgnoreCase( deleteFirstName)
+					&& personList.get(i).getLastName().equalsIgnoreCase(deleteLastName)) {
+				personList.remove(personList.get(i));
+				return;
 			}
 		}
-		if (person != null)
-			personList.remove(person);
-		else
+		
 			System.out.println("Sorry Person dosn't exist");
     }
-	public static void showTotalJsonFile() {
-		File file = new File("C:/Users/1022784/Desktop/gitProgram/");
-		File[] files = file.listFiles();
-		for (File f : files) {
-			if (f.getName().contains(".json")) {
-				System.out.print(f.getName() + " ");
-			}
-		}
-		System.out.println();
-	}
+    // Show total json file of the existing file.
 
-	private boolean checkExisitingFile(String fileName) {
-		File file = new File("C:/Users/1022784/Desktop/gitProgram/");
-		File[] files = file.listFiles();
-		for (File f : files) {
-			if (f.getName().contains(".json")) {
-				if (f.getName().equals(fileName + ".json"))
-					return true;
-			}
-		}
-		return false;
-	}
-
-	public void createAddressBook() {
-		System.out.println("Enter the name of the Address Book");
-		 addressBookName = Input.getString();
-		if (checkExisitingFile(addressBookName)) {
-			System.out.println("file already exist");
-	 		return;
-		}
-		try {
-			String filename = "C:/Users/1022784/Desktop/gitProgram/" + addressBookName + ".json";
-			 File file = new File(filename);
-			file.createNewFile();
-		} catch (Exception e) {
-			System.out.println("Unable to create file");
-		}
-	}
+	
+	
 	public void saveFile() {
-		ObjectMapper mapper = new ObjectMapper();
-		ObjectWriter writer = mapper.writer();
-		try {
-			writer.writeValue(new File("C:/Users/1022784/Desktop/gitProgram/" + addressBookName + ".json"),
-					personList);
-		} catch (Exception e) {
+			}
 
-		}
-	}
-	public void closeAddBook() {
-		
-	}
-
-	public void saveAs() {
-		System.out.println("New Name of the file");
-		this.addressBookName = Input.getString();
-	}
-
-	public void add(Person p) {
-		personList.add(p);
-	}
-
-	public void remove(Person p) {
-		personList.remove(p);
-	}
-
-	public  void sortByName() {
+		public  void sortByName() {
 		Collections.sort(personList, byName);
 		for(Person pr:personList)
 		{
@@ -192,16 +140,15 @@ public class AddressBook {
 		}
 	}
 
-	public void editPersonDetail(int idx, Person p) {
+	/*public void editPersonDetail(int idx, Person p) {
 		personList.set(idx, p);
-	}
+	}*/
     private void printPersonDetail(Person p) {
     	System.out.println("****************************************************");
     	System.out.println(p.getFirstName()+p.getLastName());
     	System.out.println("\t\t\t\t"+p.getAddress()+"\n\t\t\t\t"+p.getCity()
     	+"\n\t\t\t\t"+p.getState()+ "\n\t\t\t\t"+p.getZipCode()
     	  +"\n\t\t\t\t" + p.getMobileNumber());
-    	System.out.println("****************************************************");
 	}
 	public void sortByZipCode() {
 		Collections.sort(personList, byZipCode);
@@ -210,15 +157,14 @@ public class AddressBook {
 			printPersonDetail(pr);
 		}
 	}
-	public File openFile() throws FileNotFoundException
+	public void view()
 	{
-		AddressBook.showTotalJsonFile();
-		 System.out.println("Enter the name of the Existing Address Book");
-		 addressBookName=Input.getString();
-		 String filename = "C:/Users/1022784/Desktop/gitProgram/" + addressBookName + ".json";
-		 File fileName= new File(filename);
-		 return fileName;
+		for(Person pr:personList)
+		{
+			printPersonDetail(pr);
+		}
 	}
+
 	public void readFromFile(File fileName) 
 	{
 		try {
@@ -228,7 +174,6 @@ public class AddressBook {
         {
         	Person pr=mapper.treeToValue(obj,Person.class);
         	personList.add(pr);
-
         }
 		}
 		catch(Exception e)
@@ -246,7 +191,7 @@ public class AddressBook {
 	}
 private	static Comparator<Person> byName = new Comparator<Person>() {
 		public int compare(Person p1, Person p2) {
-			if (p1.getLastName().equals(p2.getLastName()))
+			if (p1.getLastName().equalsIgnoreCase(p2.getLastName()))
 				return p1.getFirstName().compareTo(p2.getFirstName());
 			return p1.getLastName().compareTo(p2.getLastName());
 		}
@@ -257,8 +202,4 @@ private	static Comparator<Person> byZipCode = new Comparator<Person>() {
 		}
 	};
 
-	public void closeAddressBook() {
-		// TODO Auto-generated method stub
-
-	}
 }

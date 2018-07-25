@@ -1,17 +1,19 @@
 package com.jda.advanced_utility;
 import java.util.Scanner;
+/**
+ * This is a singleton class for getting input from user.
+ */
 public class Input {
-static Scanner sc=new Scanner(System.in);
-public static int getInteger()
+public Scanner sc;
+private static Input scan=null;
+private Input()
 {
-	return sc.nextInt();
+	sc=new Scanner(System.in);
 }
-public static long getLong()
+public static Input getInputInstance()
 {
-	return sc.nextLong();
-}
-public static String getString()
-{
-	return sc.nextLine();
+	if(scan==null)
+	 scan= new Input();
+	return scan;
 }
 }
