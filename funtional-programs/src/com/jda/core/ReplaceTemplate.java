@@ -2,6 +2,7 @@ package com.jda.core;
 import com.jda.utility.*;
 public class ReplaceTemplate 
 {
+	
 	public static void main(String[] args)
 	{
 		// TODO Auto-generated method stub

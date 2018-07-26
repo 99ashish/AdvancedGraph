@@ -1,25 +1,18 @@
 package com.jda.advanced_utility;
-
-public class Commodity {
-private String commodityName;
-private float pricePerKg;
-private float weight;
+public class Commodity 
+{
+String commodityName;
+Property property;
 public String getCommodityName() {
 	return commodityName;
 }
 public void setCommodityName(String commodityName) {
 	this.commodityName = commodityName;
 }
-public float getPricePerKg() {
-	return pricePerKg;
+public Property getProperty() {
+	return property;
 }
-public void setPricePerKg(float pricePerKg) {
-	this.pricePerKg = pricePerKg;
-}
-public float getWeight() {
-	return weight;
-}
-public void setWeight(float weight) {
-	this.weight = weight;
+public void setProperty(Property property) {
+	this.property = property;
 }
 }

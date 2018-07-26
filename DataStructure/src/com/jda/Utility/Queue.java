@@ -1,11 +1,8 @@
 package com.jda.Utility;
-import java.util.HashSet;
-import java.util.Set;
 /**
  * Implementation of queue which is worked on the basis of
  * FIFO. Insertion is done from front side and deletion is done for
  * back end.
- * @author bridgelabz
  *
  */
 public class Queue {
@@ -62,5 +59,4 @@ public void deposite(int amnt)
 	public int sizeOfQueue() {
 		return size;
 	}
-
 }

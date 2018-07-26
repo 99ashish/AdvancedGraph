@@ -5,7 +5,5 @@ public class PlayDeckCard {
 	public static void main(String[] args) {
 		DeckCard deck=new DeckCard();
 		deck.distributeCard();
-
 	}
-
 }
