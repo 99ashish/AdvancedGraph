@@ -1,9 +1,30 @@
 package com.jda.advanced_utility;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+class Transaction{
+	String transactionType;
+	String date;
+	public String getTransactionType() {
+		return transactionType;
+	}
+	public void setTransactionType(String transactionType) {
+		this.transactionType = transactionType;
+	}
+	public String getDate() {
+		return date;
+	}
+	public void setDate() {
+		DateTimeFormatter date=DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+	    LocalDateTime now=LocalDateTime.now();
+	    this.date=date.format(now);
+	}
+}
 public class Stock {
 private String nameOfStack;
 private double pricePerShare;
 private double totalShare;
 private double totValue;
+Transaction transAction;
 public double getTotValue() {
 	return totValue;
 }

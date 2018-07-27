@@ -1,34 +1,40 @@
 package com.jda.advanced_utility;
 import java.io.File;
+import com.jda.advanced_utility.Property;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
-
+import java.util.Properties;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.ObjectWriter;
-
 import com.jda.advanced_utility.Commodity;
 public class Inventory {
-private static String path="/home/bridgelabz/Desktop/JavaCode/"; 
+private static String path="C:\\Users\\1022784\\Desktop\\gitProgram\\"; 
 private static Input get =Input.getInputInstance();
 List<Commodity> commodityList =new ArrayList<>();
 File fileName;
 public void addInventory()
 {
 	fileName=openFile();
+	readfromFile(fileName);
 	Commodity grain= new Commodity();
 	System.out.println("Commodity Name");
 	grain.setCommodityName(get.sc.nextLine());
+	Property pr=new Property();
+	System.out.println("Brand Name");
+	pr.setBrandName(get.sc.nextLine());
 	System.out.println("Weight");
-	grain.setWeight(get.sc.nextFloat());
+	pr.setWeight(get.sc.nextFloat());
 	System.out.println("Price Per kg");
-	grain.setPricePerKg(get.sc.nextFloat());
+	pr.setPricePerKg(get.sc.nextFloat());
+	grain.setProperty(pr);
 	commodityList.add(grain);
 	writeTofile(fileName);
 }
 public void readfromFile(File fileName)
 {
-	showTotalJsonFile();
 	try {
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode node = mapper.readTree(fileName);
@@ -70,30 +76,19 @@ private File openFile()
 { 
 	showTotalJsonFile();
 	 System.out.println("Enter the name of the Inventory File");
-	 String filename = "/home/bridgelabz/Desktop/JavaCode/" + get.sc.nextLine() + ".json";
+	 String filename = path + get.sc.nextLine() + ".json";
 	 File fileName= new File(filename);
 	 return fileName;
 }
-public float[] calculateValueOfInventory()
+public void calculateValueOfInventory()
 {
-	float []price= new float[3];
     fileName=openFile();
-	readfromFile(fileName);
+    readfromFile(fileName);
 	for(Commodity cmd:commodityList)
 	{
-		if(cmd.getCommodityName().equalsIgnoreCase("rice"))
-		{
-			price[0]+=(cmd.getWeight()*cmd.getPricePerKg());
-		}
-		else if(cmd.getCommodityName().equalsIgnoreCase("pulses"))
-		{
-			price[1]+=(cmd.getWeight()*cmd.getPricePerKg());
-		}
-		else if(cmd.getCommodityName().equalsIgnoreCase("wheats"))
-		{
-			price[2]+=(cmd.getWeight()*cmd.getPricePerKg());
-		}
+		System.out.println(cmd.getCommodityName());
+		System.out.println("\t\t"+cmd.property.getBrandName()+":"
+		+cmd.property.getWeight()*cmd.property.getPricePerKg());
 	}
-	return price;
 }
 }

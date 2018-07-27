@@ -4,3 +4,13 @@
 /Input.class
 /ManagerAddressBook.class
 /Person.class
+/Commodity.class
+/DeckCard.class
+/Inventory.class
+/InventoryStore.class
+/Property.class
+/Stock.class
+/StockAccount.class
+/StockPortfolio.class
+/Transaction.class
+/StockBook.class

@@ -1,5 +1,4 @@
 package com.jda.advanced_core;
-
 import com.jda.advanced_utility.Input;
 import com.jda.advanced_utility.Inventory;
 public class InventoryManagement 
@@ -19,8 +18,8 @@ public class InventoryManagement
     		  inventory.addInventory();
     		  break;
     	  case 2:
-    		      float []price=inventory.calculateValueOfInventory();
-    		      System.out.println("Rice value :" + price[0]+"\n" + "Pulses value:" + price[1] +"\n" +"Wheat value" + price[2]);
+    		      inventory.calculateValueOfInventory();
+    		      break;
     	  }
       }
 	}

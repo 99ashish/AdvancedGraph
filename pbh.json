@@ -1,1 +1,1 @@
-[{"commodityName":"rice","pricePerKg":23.0,"weight":23.0}]
+[{"commodityName":"rice","property":{"brandName":"basmati","pricePerKg":545.0,"weight":34.0}},{"commodityName":"wheat","property":{"brandName":"tdt","pricePerKg":75.0,"weight":75.0}}]
