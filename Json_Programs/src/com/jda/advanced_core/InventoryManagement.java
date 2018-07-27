@@ -8,7 +8,7 @@ public class InventoryManagement
 	{
       while(true)
       {
-    	  System.out.println("1.Add inventory" + "\n" +"2.Get Value" +"\n" +"3.Exit");
+    	  System.out.println("1.Add inventory" + "\n" +"2.Get Inventory Details" +"\n" +"3.Exit");
     	  int opt=get.sc.nextInt();
     	  get.sc.nextLine();
     	  Inventory inventory=new Inventory();

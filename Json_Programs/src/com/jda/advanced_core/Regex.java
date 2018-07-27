@@ -53,7 +53,7 @@ public class Regex
 		}
      }
   private static void replaceName() {
-         Pattern p = Pattern.compile("<<\\w+>>");
+         Pattern p = Pattern.compile("<{2}\\w+{2}>");
         Matcher m = p.matcher(tmplateStr);
          if (m.find()) {
              tmplateStr = m.replaceAll(fullName.split(" ")[0]);
@@ -61,7 +61,7 @@ public class Regex
      }
 
      private static void replaceFullName() {
-        Pattern p = Pattern.compile("<<\\w+\\s\\w+>>");
+        Pattern p = Pattern.compile("<{2}\\w+\\s\\w+{2}>");
         Matcher m = p.matcher(tmplateStr);
          if (m.find()) {
              tmplateStr = m.replaceAll(fullName);
@@ -70,14 +70,14 @@ public class Regex
 
      private static void replaceDate() 
      {
-         Pattern p = Pattern.compile("<<[d]{2}/[m]{2}/[y]{4}>>");
+         Pattern p = Pattern.compile("<{2}[d]{2}/[m]{2}/[y]{4}{2}>");
         Matcher m = p.matcher(tmplateStr);
          if (m.find()) {
              tmplateStr = m.replaceAll(date);
          }
      }
     private static void replacePhoneNumber() {
-         Pattern p = Pattern.compile("<<91-x{10}>>");
+         Pattern p = Pattern.compile("<{2}91-x{10}{2}>");
         Matcher m = p.matcher(tmplateStr);
          if (m.find()) {
              tmplateStr = m.replaceAll(mobileNumber);

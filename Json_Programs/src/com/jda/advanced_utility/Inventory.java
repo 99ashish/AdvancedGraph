@@ -11,21 +11,21 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.ObjectWriter;
 import com.jda.advanced_utility.Commodity;
 public class Inventory {
-private static String path="C:\\Users\\1022784\\Desktop\\gitProgram\\"; 
+private static String path="/home/bridgelabz/Desktop/JavaCode/"; 
 private static Input get =Input.getInputInstance();
-List<Commodity> commodityList =new ArrayList<>();
+private static List<Commodity> commodityList =new ArrayList<>();
 File fileName;
 public void addInventory()
 {
 	fileName=openFile();
 	readfromFile(fileName);
 	Commodity grain= new Commodity();
-	System.out.println("Commodity Name");
+	System.out.println("Enter Commodity Name");
 	grain.setCommodityName(get.sc.nextLine());
 	Property pr=new Property();
-	System.out.println("Brand Name");
+	System.out.println("Enter Brand Name");
 	pr.setBrandName(get.sc.nextLine());
-	System.out.println("Weight");
+	System.out.println("Enter the Weight");
 	pr.setWeight(get.sc.nextFloat());
 	System.out.println("Price Per kg");
 	pr.setPricePerKg(get.sc.nextFloat());

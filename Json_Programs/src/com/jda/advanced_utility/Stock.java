@@ -23,14 +23,7 @@ public class Stock {
 private String nameOfStack;
 private double pricePerShare;
 private double totalShare;
-private double totValue;
 Transaction transAction;
-public double getTotValue() {
-	return totValue;
-}
-public void setTotValue() {
-	this.totValue = totalShare*pricePerShare;
-}
 public String getNameOfStack() {
 	return nameOfStack;
 }
@@ -45,6 +38,12 @@ public void setPricePerShare(double pricePerShare) {
 }
 public double getTotalShare() {
 	return totalShare;
+}
+public Transaction getTransAction() {
+	return transAction;
+}
+public void setTransAction(Transaction transAction) {
+	this.transAction = transAction;
 }
 public void setTotalShare(double totalShare) {
 	this.totalShare = totalShare;

@@ -22,7 +22,6 @@ public class StockAccount {
 		stk.setPricePerShare(get.sc.nextDouble());
 		System.out.println("Total stock");
 		stk.setTotalShare(get.sc.nextDouble());
-		stk.setTotValue();
 		writeToFile(file,stk);
 	}
 		catch(Exception e)
@@ -30,13 +29,13 @@ public class StockAccount {
 			System.out.println(e);
 		}
 	}
-	public double valueOf()
+	/*public double valueOf()
 	{
 		StockPortfolio obj= new StockPortfolio();
 		obj.readFromFile();
 		return obj.stockList.get(0).getTotValue();
 		
-	}
+	}*/
 private void writeToFile(File fileName,Stock stk) throws JsonGenerationException, JsonMappingException, IOException 
 	{
 		ObjectMapper mapper = new ObjectMapper();
