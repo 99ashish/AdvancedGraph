@@ -2,7 +2,7 @@ package com.jda.advanced_utility;
 
 public class PatientInfo {
 private String patientName;
-private String mobileNumber;
+private long mobileNumber;
 private int age;
 private long id;
 public String getPatientName() {
@@ -11,11 +11,11 @@ public String getPatientName() {
 public void setPatientName(String patientName) {
 	this.patientName = patientName;
 }
-public String getMobileNumber() {
+public long getMobileNumber() {
 	return mobileNumber;
 }
-public void setMobileNumber(String mobileNumber) {
-	this.mobileNumber = mobileNumber;
+public void setMobileNumber(long l) {
+	this.mobileNumber = l;
 }
 public int getAge() {
 	return age;

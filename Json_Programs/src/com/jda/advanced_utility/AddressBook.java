@@ -180,7 +180,6 @@ public class AddressBook
 		{
 			System.out.println("Empty File");
 		}
-
 	}
 	public void writeToFile(File fileName) throws JsonGenerationException, JsonMappingException, IOException 
 	{

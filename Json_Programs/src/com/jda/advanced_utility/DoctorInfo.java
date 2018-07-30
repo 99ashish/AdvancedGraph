@@ -1,5 +1,4 @@
 package com.jda.advanced_utility;
-
 public class DoctorInfo {
 	private String name;
 	private long mobileNumber;
@@ -36,6 +35,4 @@ public class DoctorInfo {
 	public void setAvailability(Availabilty availability) {
 		this.availability = availability;
 	}
-	
-
 }
