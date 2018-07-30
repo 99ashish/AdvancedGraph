@@ -31,8 +31,8 @@ public class PrimeAnagramQueue
 		 }
   while(!stk.isEmpty())
   {
-	  String ch1=stk.deque();
-	  String ch2=stk.deque();
+	  String ch1=(String) stk.deque();
+	  String ch2=(String) stk.deque();
 	  System.out.println(ch1+ " " + ch2);
   }
 

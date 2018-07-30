@@ -11,14 +11,14 @@ import java.io.IOException;
  *the data field and second the ref to the next node object.
  *
  */
-public class CustomLinkedList
+public class CustomLinkedList<T>
 {
 	static int size = 0;
-	String data;
+	T data;
 	CustomLinkedList link;
 	public static CustomLinkedList head;
 	public static CustomLinkedList end;
-	public void add(String str)
+	public void add(T str)
 	{
 		size++;
 		if (head == null) 
@@ -36,7 +36,7 @@ public class CustomLinkedList
 			end = node;
 		}
 	}
-	public void remove(String str) 
+	public void remove(T str) 
 	{
 		CustomLinkedList list = head;
 		CustomLinkedList prev = list;
@@ -73,7 +73,7 @@ public class CustomLinkedList
 			}
 			fw.close();
 	}
-	public int search(String str)
+	public int search(T str)
 	{
 		if(head==null)
 			return -1;
@@ -100,11 +100,11 @@ public int sizeOfLinkedList()
 {
 	return size;
 }
-public void append(String str)
+public void append(T str)
 {
 	add(str);
 }
-public int index(String str)
+public int index(T str)
 {
 	if(head.data==str)
 		return 0;
@@ -119,7 +119,7 @@ public int index(String str)
 	}	
 	return -1;
 }
-public void insert(int pos, String str)
+public void insert(int pos, T str)
 {
 	if(pos==0)
 	{
@@ -148,11 +148,10 @@ public void insert(int pos, String str)
 	}
 	add(str);
 }
-public String pop()
+public T pop()
 {
 	if(head==null)
 	{
-		size--;
 		return null;
 	}
 	CustomLinkedList list=head;
@@ -162,7 +161,7 @@ public String pop()
 		prev=list;
 		list=list.link;
 	}
-	String elmnt=prev.data;
+	T elmnt=(T) prev.data;
 	size--;
 	if(list==head)
 	{
@@ -173,14 +172,14 @@ public String pop()
 	prev.link=null;
 	return elmnt;
 }
-public String pop(int pos)
+public T pop(int pos)
 {
 	if(head==null)
 		return null;
 	if(pos==0)
 	{
 		size--;
-	  String str=head.data;
+	  T str=(T) head.data;
 	  head=head.link;
 	  return str;
 	}
@@ -193,14 +192,14 @@ public String pop(int pos)
 		if(cnt==pos)
 		{
 			size--;
-			 String str=list.data;
+			 T str=(T)list.data;
 			  prev.link=list.link;
 			  return str;
 		}
 		prev=list;
 		list=list.link;
 	}
-	String elmnt=prev.data;
+	T elmnt=(T)prev.data;
 	if(list==end)
 	{
 	end=prev;

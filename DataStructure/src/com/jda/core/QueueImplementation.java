@@ -9,7 +9,7 @@ import com.jda.utility.AlgorithmUtility;
  */
 public class QueueImplementation
 {
-	public static void main(String[] args) 
+	public static <T> void main(String[] args) 
 	{
 		Queue que= new Queue();
 		while(true)
@@ -59,7 +59,7 @@ public class QueueImplementation
 				}
 					int amnt=que.getBal();
 					System.out.println("Current account balance is : "+ amnt);
-				    String name=que.deque();
+				    T name=(T) que.deque();
 				    
 				    System.out.println(name + ", Done his/her job!");
 			}

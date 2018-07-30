@@ -5,16 +5,16 @@ package com.jda.Utility;
  * back end.
  *
  */
-public class Queue {
+public class Queue<T> {
 	Queue link;
-	String name;
+	T name;
 	int amount=20000;
 	static int size = 0;
 	public static Queue front;
 	public static Queue back;
-	public void push(String val) 
+	public void push(T val) 
 	{
-		Queue node = new Queue();
+		Queue<T> node = new Queue<>();
 		node.name = val;
 		if (size==0) {
 			front = node;
@@ -42,13 +42,13 @@ public void deposite(int amnt)
 {
 	back.amount+=amnt;
 }
-	public String  deque() {
+	public T  deque() {
 		if(back==null)
 			return null;
-		String ch=back.name;
+		T ch= (T) back.name;
 		back = back.link;
 		size--;
-		return ch;
+		return (T)ch;
 	}
 
 	public boolean isEmpty() {

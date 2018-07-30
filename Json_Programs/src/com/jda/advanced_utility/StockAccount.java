@@ -1,16 +1,13 @@
 package com.jda.advanced_utility;
-
 import java.io.File;
 import java.io.IOException;
-
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.ObjectWriter;
-
 public class StockAccount {
 	private static Input get =Input.getInputInstance();
-	private static String path="/home/bridgelabz/Desktop/JavaCode/"; 
+	private static String path="C:\\Users\\1022784\\Desktop\\gitProgram\\StakeHolder\\"; 
 	public void createNewAccount(String fileName)
 	{
 		try{

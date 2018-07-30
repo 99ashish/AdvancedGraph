@@ -14,12 +14,16 @@ public class StockBook
 		{
 	      stockName.clear();
 	      fileName=StockPortfolio.openFile("StockBook",stockName);
-	      System.out.println("Company Name"+"\t\t" + "Price Per Share" +"\t\t" +"Total Share");
+	      System.out.println("--------------------------------------------------------------------------");
         	for(int i=0;i<stockName.size();i++)
-		          System.out.println(stockName.get(i).getNameOfStack()+"\t\t\t\t\t"
-				           +stockName.get(i).getPricePerShare()+"\t\t\t\t\t"
-				           +stockName.get(i).getTotalShare()+"\t\t\t\t\t");
-	}
+        	{
+		          System.out.println("\t\t\t\t"  + "Company Name:     "+stockName.get(i).getNameOfStack()
+		        		            +"\n\t\t\t\t"+ "Price per share:  "+stockName.get(i).getPricePerShare()
+		        		            +"\n\t\t\t\t"+ "Available share:  "+stockName.get(i).getTotalShare()+"\t\t\t\t\t");
+        	System.out.println("--------------------------------------------------------------------------");
+        	}
+        	System.out.println("--------------------------------------------------------------------------");
+        	}
 		catch(Exception e)
 		{
 			System.out.println("Unable to show stock");
