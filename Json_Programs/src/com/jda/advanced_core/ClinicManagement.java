@@ -18,8 +18,6 @@ public class ClinicManagement {
 				int opt=get.sc.nextInt();
 				if(opt==5)
 					break;
-		    if(opt==4)
-		    	break;
 		    switch(opt)
 		    {
 		    case 1:ClinicUser.addDoctorDetail();break;

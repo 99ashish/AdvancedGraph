@@ -11,44 +11,10 @@ import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.ObjectWriter;
-class Search<T>
-{
-	public void searchId(List<T> dataList,int id,Class className)
-	{
-		for(int i=0;i<dataList.size();i++)
-		{
-			if( ((className)dataList.get(i)).getId().compareTo(id)==0)
-			{
-				System.out.println(dataList.get(i));
-			}
-		}
-		
-	}
-	public void searchByName(List<T> dataList,String name)
-	{
-			for(int i=0;i<dataList.size();i++)
-			{
-				if( ((PatientInfo)(dataList.get(i))).getPatientName().compareTo(name)==0)
-				{
-					System.out.println(dataList.get(i));
-				}
-			}
-	}
-	public void searchByMobNum(List<T> dataList,long mobileNumber)
-	{
-		for(int i=0;i<dataList.size();i++)
-		{
-			if( dataList.get(i).getMobileNumber().compareTo(mobileNumber)==0)
-			{
-				System.out.println(dataList.get(i));
-			}
-		}
-	}
-}
 public class ClinicUser<T> {
 	private static final Class DoctorInfo = null;
 	static Input get =Input.getInputInstance();
-	private static String path ="C:\\Users\\1022784\\Desktop\\gitProgram\\StakeHolder\\";
+	private static String path ="/home/bridgelabz/Desktop/JavaCode/StakeHolder/";
 	public  void  readFromFile(File fileName,List<T> patientInfo,Class className) 
 	{
 		try {
@@ -227,26 +193,86 @@ public class ClinicUser<T> {
 		}
 		
 	}
+	private void searchInPatient(List<PatientInfo> patientInfo, String val, String string) {
+		boolean found=false; 
+		int i;
+		for( i=0;i<patientInfo.size();i++)
+		{
+			if(string.equals("ById")&&(patientInfo.get(i).getId()-Long.valueOf(val))==0)
+			{found=true;break;}
+			if(string.equals("ByMobNum")&&(patientInfo.get(i).getMobileNumber()-Long.valueOf(val))==0)
+			{found=true;break;}
+			if(string.equals("ByName")&&(patientInfo.get(i).getPatientName().equals(val)))
+			{found=true;break;}
+	}
+		if(found)
+		{
+			System.out.println("Data Found for Patient............................................................");
+			System.out.println("Patient Name                            :"+ patientInfo.get(i).getPatientName()
+					               +"\n" +"Patient Id                                  :" + patientInfo.get(i).getId()
+					               +"\n" +"Patient Mobile Number          :" + patientInfo.get(i).getMobileNumber());
+		}
+		else
+			System.out.println("data not found");
+	}
+	private void searchInDoctor(List<DoctorInfo> doctorInfo, String val, String string) {
+		boolean found=false;
+		int i;
+		for(i=0;i<doctorInfo.size();i++)
+		{
+			if(string.equals("ById")&&(doctorInfo.get(i).getId()-Long.valueOf(val))==0)
+			{found=true;break;}
+			if(string.equals("ByMobNum")&&(doctorInfo.get(i).getMobileNumber()-Long.valueOf(val))==0)
+			{found=true;break;}
+			if(string.equals("ByName")&&(doctorInfo.get(i).getName().equals(val)))
+			{found=true;break;}
+		}	
+		if(found)
+		{
+			System.out.println("Data Found for Doctor............................................................");
+			System.out.println("Doctor Name                            :"+ doctorInfo.get(i).getName()
+					               +"\n" +"Doctor Id                                  :" + doctorInfo.get(i).getId()
+					               +"\n" +"Doctor Mobile Number          :" + doctorInfo.get(i).getMobileNumber());
+		}
+		else
+			System.out.println("data not found");
+	}
 	private void searchPatientById(List<PatientInfo>  patientInfo)
 	{
 		System.out.println("Enter the Id");
-		int val= get.sc.nextInt();
-		Search<PatientInfo> genericSearch= new Search<PatientInfo>();
-		genericSearch.searchId(patientInfo,val);
+		String val= get.sc.nextLine();
+	    searchInPatient(patientInfo,val,"ById");
 	}
 	private void searchPatientBYMobNum(List<PatientInfo>  patientInfo)
 	{
 		System.out.println("Enter the Mobile Number");
-		long val= get.sc.nextLong();
-		Search<PatientInfo> genericSearch= new Search<>();
-		genericSearch.searchByMobNum(patientInfo,val);
+		String val= get.sc.nextLine();
+	    searchInPatient(patientInfo,val,"ByMobNum");
 	}
 	private void searchPatientByName(List<PatientInfo>  patientInfo)
 	{
 		System.out.println("Enter the name");
 		String val= get.sc.nextLine();
-		Search<PatientInfo> genericSearch= new Search<>();
-		genericSearch.searchByName(patientInfo,val);
+	    searchInPatient(patientInfo,val,"ByName");
+	}
+	
+	private void searchDoctorById(List<DoctorInfo>  doctorInfo)
+	{
+		System.out.println("Enter the Id");
+		String val= get.sc.nextLine();
+	    searchInDoctor(doctorInfo,val,"ById");
+	}
+	private void searchDoctorBYMobNum(List<DoctorInfo>  doctorInfo)
+	{
+		System.out.println("Enter the Mobile Number");
+		String val= get.sc.nextLine();
+	    searchInDoctor(doctorInfo,val,"ByMobNum");
+	}
+	private void searchDoctorByName(List<DoctorInfo>  doctorInfo)
+	{
+		System.out.println("Enter the name");
+		String val= get.sc.nextLine();
+	    searchInDoctor(doctorInfo,val,"ByName");
 	}
 	
 	public void doctorMenu() {
@@ -258,9 +284,9 @@ public class ClinicUser<T> {
 		get.sc.nextLine();
 		switch(opt)
 		{
-		//case 1:searchDoctorByName(drInfo);break;
-		//case 2:searchById();System.out.println("Enter the id");searchFunction((List<T>)patientInfo, (T)get.sc.nextLine());break;
-		//case 3:searchBYMobNum();System.out.println("Enter the Mobile number");searchFunction((List<T>)patientInfo,(T)get.sc.nextLine());break;
+		case 1:searchDoctorByName(drInfo);break;
+		case 2:searchDoctorById(drInfo);break;
+		case 3:searchDoctorBYMobNum(drInfo);break;
 		default:
 			System.out.println("worng entry");
 		}

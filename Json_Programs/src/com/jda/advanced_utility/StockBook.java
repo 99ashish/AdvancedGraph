@@ -2,9 +2,11 @@ package com.jda.advanced_utility;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 public class StockBook 
 {
+	List<Stock> listofShare=new LinkedList<>();
 	public static List<Stock> stockName=new ArrayList<>();
 	private static Input get =Input.getInputInstance();
 	static File fileName;
@@ -40,6 +42,12 @@ public class StockBook
 		System.out.println("Number of Share");
 		stk.setTotalShare(get.sc.nextDouble());
 		stockName.add(stk);
+		listofShare.add(stk);
+	}
+	private   void addIntoList(List<Stock> list)
+	{
+		for(int i=0;i<list.size();i++)
+			listofShare.add(list.get(i));
 	}
 	public void addStockInStockBook() throws FileNotFoundException
 	{  
@@ -47,6 +55,8 @@ public class StockBook
 	 {
     	stockName.clear();
 	    fileName=StockPortfolio.openFile("StockBook",stockName);
+	    listofShare.clear();
+	    addIntoList(stockName);
 		System.out.println("Number of stocks");
 		int totNumberOfStock=get.sc.nextInt();
 		for(int i=0;i<totNumberOfStock;i++)

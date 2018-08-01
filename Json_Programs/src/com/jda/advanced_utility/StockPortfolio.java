@@ -1,5 +1,4 @@
 package com.jda.advanced_utility;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -10,13 +9,16 @@ import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.ObjectWriter;
-
+import com.jda.Utility.Queue;
+import com.jda.Utility.Stack;
 public class StockPortfolio {
 	public static List<Stock> stockList = new ArrayList<>();
 	private static Input get = Input.getInputInstance();
-	private static String path = "C:\\Users\\1022784\\Desktop\\gitProgram\\StakeHolder\\";
+	private static String path = "/home/bridgelabz/Desktop/JavaCode/StakeHolder/";
 	private File fileName;
-
+   Queue<Transaction> que=new Queue<>();
+   Stack<Stock> stack=new Stack<>();
+ 
 	public static <T> void readFromFile(File fileName, List<T> putValue) {
 		try {
 			ObjectMapper mapper = new ObjectMapper();
@@ -36,7 +38,6 @@ public class StockPortfolio {
 		ObjectWriter writer = mapper.writer();
 		writer.writeValue(fileName, obj);
 	}
-
 	private static boolean checkExisitingFile(String fileName) {
 		fileName+=".json";
 		File file = new File(path);
@@ -49,12 +50,25 @@ public class StockPortfolio {
 		}
 		return false;
 	}
-
+	private void addIntoQueue(List<Stock> list)
+	{
+		for(int i=0;i<list.size();i++)
+			que.push(list.get(i).getTransAction());
+	}
+	private void addIntoStack(List<Stock> list)
+	{
+		for(int i=0;i<list.size();i++)
+			stack.push(list.get(i));
+	}
 	void buy() {
 		StockBook.stockName.clear();
 		StockBook.showStockName();
 		stockList.clear();
+		que.front=null;
 		readFromFile(fileName, stockList);
+		addIntoQueue(stockList);
+		stack.top=null;
+		addIntoStack(stockList);
 		Stock stk = new Stock();
 		boolean exist = false;
 		System.out.println("Enter the stock name");
@@ -77,6 +91,7 @@ public class StockPortfolio {
 					stockList.add(stk);
 					exist = true;
 					try {
+						que.push(tr);
 						writeToFile(fileName, stockList);
 						writeToFile(StockBook.fileName, StockBook.stockName);
 					} catch (Exception e) {
@@ -98,6 +113,10 @@ public class StockPortfolio {
 		StockBook.stockName.clear();
 		readFromFile(fileName, stockList);
 		StockBook.showStockName();
+		que.front=null;
+		addIntoQueue(stockList);
+		stack.top=null;
+		addIntoStack(stockList);
 		Stock stk = new Stock();
 		boolean exist=false;
 		System.out.println("Enter the stock name");
@@ -125,8 +144,9 @@ public class StockPortfolio {
 					StockBook.stockName.set(idx, stkBook);
 					stockList.add(stk);
 					exist=true;
-					
 					try {
+						que.push(tr);
+						stack.push(stk);
 						writeToFile(fileName, stockList);
 						writeToFile(StockBook.fileName, StockBook.stockName);
 						
@@ -222,27 +242,13 @@ public class StockPortfolio {
 			int opt = get.sc.nextInt();
 			get.sc.nextLine();
 			switch (opt) {
-			case 1:
-				buy();
-				break;
-			case 2:
-				sell();
-				break;
-			case 3:
-				valueOf();
-				break;
-			case 4:
-				saveAccount();
-				break;
-			case 5:
-				getAccountDetail();
-				break;
-			case 6:
-				return;
-			default:
-				System.out.println("Choose valid option");
-				openAccount();
-				break;
+			case 1:buy();break;
+			case 2:sell();break;
+			case 3:valueOf();break;
+			case 4:saveAccount();break;
+			case 5:getAccountDetail();break;
+			case 6:return;
+			default:System.out.println("Choose valid option");openAccount();break;
 			}
 		}
 	}
@@ -267,38 +273,17 @@ public class StockPortfolio {
 		}
 		
 	}
-
 	public static File openFile(String filename, List<Stock> putValue) throws FileNotFoundException {
 		filename = path + filename + ".json";
 		File fileName = new File(filename);
 		readFromFile(fileName, putValue);
 		return fileName;
 	}
-
-	/*
-	 * public void buy(String fileName) { fileName=openFile(fileName,stockList); }
-	 */
-	public void getStockValue() {
-		for (int i = 0; i < stockList.size(); i++)
-			;
-		// System.out.println("\t\t\t" + stockList.get(i).getNameOfStack() +": " +
-		// stockList.get(i).getTotValue());
-	}
-
-	public double getTotStockValue() {
-		readFromFile(fileName, stockList);
-		double totalValue = 0;
-		for (int i = 0; i < stockList.size(); i++) {
-			// totalValue+=(stockList.get(i).getTotValue());
-		}
-		return totalValue;
-	}
-
 	public void openStockAccount() {
 		get.sc.nextLine();
 		while(true)
 		{
-		System.out.println("Enter your account name123");
+		System.out.println("Enter your account name");
 		String filename = get.sc.nextLine();
 		if (checkExisitingFile(filename)) {
 			try {
