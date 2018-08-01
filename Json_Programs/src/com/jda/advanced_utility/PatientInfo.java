@@ -1,5 +1,7 @@
 package com.jda.advanced_utility;
 
+import java.util.Comparator;
+
 public class PatientInfo {
 private String patientName;
 private long mobileNumber;

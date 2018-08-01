@@ -3,6 +3,7 @@ package com.jda.advanced_utility;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import org.codehaus.jackson.JsonGenerationException;
@@ -10,12 +11,44 @@ import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.ObjectWriter;
-
+class Search<T>
+{
+	public void searchId(List<T> dataList,int id,Class className)
+	{
+		for(int i=0;i<dataList.size();i++)
+		{
+			if( ((className)dataList.get(i)).getId().compareTo(id)==0)
+			{
+				System.out.println(dataList.get(i));
+			}
+		}
+		
+	}
+	public void searchByName(List<T> dataList,String name)
+	{
+			for(int i=0;i<dataList.size();i++)
+			{
+				if( ((PatientInfo)(dataList.get(i))).getPatientName().compareTo(name)==0)
+				{
+					System.out.println(dataList.get(i));
+				}
+			}
+	}
+	public void searchByMobNum(List<T> dataList,long mobileNumber)
+	{
+		for(int i=0;i<dataList.size();i++)
+		{
+			if( dataList.get(i).getMobileNumber().compareTo(mobileNumber)==0)
+			{
+				System.out.println(dataList.get(i));
+			}
+		}
+	}
+}
 public class ClinicUser<T> {
 	private static final Class DoctorInfo = null;
 	static Input get =Input.getInputInstance();
-	private static String path ="/home/bridgelabz/Desktop/JavaCode/StakeHolder/";
-	
+	private static String path ="C:\\Users\\1022784\\Desktop\\gitProgram\\StakeHolder\\";
 	public  void  readFromFile(File fileName,List<T> patientInfo,Class className) 
 	{
 		try {
@@ -177,33 +210,61 @@ public class ClinicUser<T> {
 	}
 		StockPortfolio.writeToFile(fileName, drInfo);
   }
-	private<T> void searchFunction(List<T> list , T val)
-	{
-		for(int i=0;i<list.size();i++)
-		{
-			
-		}
-	}
 	public  void patientMenu() {
 		File fileName=new File(path+"PatientInfo" +".json");
 		List<PatientInfo> patientInfo= new ArrayList<>();
-		readFromFile(fileName, (List<T>) patientInfo,DoctorInfo.class);
+		readFromFile(fileName, (List<T>) patientInfo,PatientInfo.class);
 		System.out.println("1.Search by name"+"\n2."+ "Search by Id" +"\n3.Search By Mobile number");
 		int opt=get.sc.nextInt();
+		get.sc.nextLine();
 		switch(opt)
 		{
-		case 1:System.out.println("Enter the name");searchFunction((List<T>)patientInfo,(T)get.sc.nextLine());break;
-		case 2:System.out.println("Enter the id");searchFunction((List<T>)patientInfo, (T)get.sc.nextLine());break;
-		case 3:System.out.println("Enter the Mobile number");searchFunction((List<T>)patientInfo,(T)get.sc.nextLine());break;
+		case 1:searchPatientByName(  patientInfo);break;
+		case 2:searchPatientById(patientInfo);break;
+		case 3:searchPatientBYMobNum(patientInfo);break;
 		default:
 			System.out.println("worng entry");
 		}
 		
 	}
+	private void searchPatientById(List<PatientInfo>  patientInfo)
+	{
+		System.out.println("Enter the Id");
+		int val= get.sc.nextInt();
+		Search<PatientInfo> genericSearch= new Search<PatientInfo>();
+		genericSearch.searchId(patientInfo,val);
+	}
+	private void searchPatientBYMobNum(List<PatientInfo>  patientInfo)
+	{
+		System.out.println("Enter the Mobile Number");
+		long val= get.sc.nextLong();
+		Search<PatientInfo> genericSearch= new Search<>();
+		genericSearch.searchByMobNum(patientInfo,val);
+	}
+	private void searchPatientByName(List<PatientInfo>  patientInfo)
+	{
+		System.out.println("Enter the name");
+		String val= get.sc.nextLine();
+		Search<PatientInfo> genericSearch= new Search<>();
+		genericSearch.searchByName(patientInfo,val);
+	}
+	
 	public void doctorMenu() {
 		File fileName=new File(path+"DoctorInfo" +".json");
 		List<DoctorInfo> drInfo= new ArrayList<>();
 		readFromFile(fileName, (List<T>) drInfo,DoctorInfo.class);
+		System.out.println("1.Search by name"+"\n2."+ "Search by Id" +"\n3.Search By Mobile number");
+		int opt=get.sc.nextInt();
+		get.sc.nextLine();
+		switch(opt)
+		{
+		//case 1:searchDoctorByName(drInfo);break;
+		//case 2:searchById();System.out.println("Enter the id");searchFunction((List<T>)patientInfo, (T)get.sc.nextLine());break;
+		//case 3:searchBYMobNum();System.out.println("Enter the Mobile number");searchFunction((List<T>)patientInfo,(T)get.sc.nextLine());break;
+		default:
+			System.out.println("worng entry");
+		}
+	
 		// TODO Auto-generated method stub
 		
 	}

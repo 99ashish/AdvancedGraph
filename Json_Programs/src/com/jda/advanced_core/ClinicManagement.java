@@ -14,7 +14,7 @@ public class ClinicManagement {
 		
 			while(true)
 			{
-				System.out.println("1.Add Doctors Details" + "\n" +"2.Add Patient Appointment" +"\n"+"3.Patient menu" +"\n" +"\n"+"4.Patient menu" +"\n"+"5.Quit");
+				System.out.println("1.Add Doctors Details" + "\n" +"2.Add Patient Appointment" +"\n"+"3.Patient menu" +"\n"+"4.Doctor's menu" +"\n"+"5.Quit");
 				int opt=get.sc.nextInt();
 				if(opt==5)
 					break;
