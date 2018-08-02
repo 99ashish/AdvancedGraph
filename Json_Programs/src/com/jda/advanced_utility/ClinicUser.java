@@ -14,7 +14,7 @@ import org.codehaus.jackson.map.ObjectWriter;
 public class ClinicUser<T> {
 	private static final Class DoctorInfo = null;
 	static Input get =Input.getInputInstance();
-	private static String path ="/home/bridgelabz/Desktop/JavaCode/StakeHolder/";
+	private static String path ="C:\\Users\\1022784\\Desktop\\JavaPrograms\\StakeHolder\\";
 	public  void  readFromFile(File fileName,List<T> patientInfo,Class className) 
 	{
 		try {
@@ -41,12 +41,12 @@ public class ClinicUser<T> {
 		for(int i=0;i<drInfo.size();i++)
 		{
 			System.out.println("********************************************************************************");
-			System.out.println((i+1)+".\t\t\t" +"                    Id:    "+ drInfo.get(i).getId()
-					                    +"\n\t\t\t" +"Doctor Name:    " +drInfo.get(i).getName()
-					                    +"\n\t\t\t\t" + "Availability: ");
+			System.out.println((i+1)+".\t\t\t" +     "               Id:    "+ drInfo.get(i).getId()
+					                    +"\n\t\t\t" +"      Doctor Name:    " +drInfo.get(i).getName()
+					                    +"\n\t\t\t" +"      Availability:   ");
 			for(int j=0; j< drInfo.get(i).getAvailability().getSchedule().size();j++)
 			{
-				System.out.println("\t\t\t\t\t" +drInfo.get(i).getAvailability().getSchedule().get(j).getDay()+"  "+drInfo.get(i).getAvailability().getSchedule().get(j).getTime() );
+				System.out.println("\t\t\t\t\t\t" +drInfo.get(i).getAvailability().getSchedule().get(j).getDay()+"  "+drInfo.get(i).getAvailability().getSchedule().get(j).getTime() );
 			}
 		}
 		return (List<T>) drInfo;
@@ -59,18 +59,28 @@ public class ClinicUser<T> {
 			List<PatientInfo> patientInfo= new ArrayList<>();
 			readFromFile(fileName,(List<T>) patientInfo,PatientInfo.class);
 			List<PatientInfo> patient= new ArrayList<>();
+			boolean exist=false;
 			get.sc.nextLine();
 			PatientInfo pr=new PatientInfo();
 			System.out.println("Patient Name");
 			pr.setPatientName(get.sc.nextLine());
-			System.out.println("Unique Id");
-			pr.setId(get.sc.nextLong());
 			System.out.println("Mobile Number");
 			pr.setMobileNumber(get.sc.nextLong());
+			int idx1=searchInPatient(patientInfo, pr.getPatientName(), "ByName",false);
+			if(idx1>=0 &&(patientInfo.get(idx1).getMobileNumber()-pr.getMobileNumber())==0)
+			{
+				System.out.println("Your data already exist in our system");
+				exist=true;
+			}
+			else
+			{
+			System.out.println("Unique Id");
+			pr.setId(get.sc.nextLong());
 			System.out.println("Age");
 			pr.setAge(get.sc.nextInt());
 			patient.add(pr);
 			StockPortfolio.writeToFile(fileName, patientInfo);
+			}
 			while(true)
 			{
 			System.out.println("Enter a valid serial number of doctor to get appointment........");
@@ -80,39 +90,49 @@ public class ClinicUser<T> {
 				System.out.println("Not a valid option");
 				continue;
 			}
-           Appointment apt=new Appointment();
-           apt.doctorName=drInfo.get(opt-1);
-           List<Appointment> aptDetail =new ArrayList<>();
-           File file=new File(path+"Appointment"+".json");
-           readFromFile(file,(List<T>) aptDetail,Appointment.class);
-           if(have(aptDetail,apt.doctorName))
-           {
-        	   //System.out.println("hi");
-        	   int idx=getIdx(aptDetail,drInfo.get(opt-1));
-        	   if(aptDetail.get(idx).patientName.size()==5)
-        	   {
-        		   System.out.println("Doctor is not availble select other one");
-        		   continue;
-        	   }
-        	   aptDetail.get(idx).patientName.add(pr);
-           }
-        	else
-        	   {
-        		  Appointment patientApt= new Appointment();
-        		  List<PatientInfo> ptr=new ArrayList<>();
-        		  ptr.add(pr);
-        		  patientApt.setDoctorName(apt.doctorName);
-        		  patientApt.setPatientName(ptr);
-        		  aptDetail.add(patientApt);
-        		  
-        	   }
-        	   File fileName1=new File("/home/bridgelabz/Desktop/JavaCode/StakeHolder/Appointment.json");
-        	   writeToFile(fileName1,(List<T>) aptDetail,Appointment.class);
-        	   break;
-           }
+			if(exist)
+				pr=patientInfo.get(idx1);
+			addAppointment(pr,drInfo.get(opt-1));
+         }
+	}
+	private void addAppointment(PatientInfo pr,DoctorInfo doctorName)
+	{
+		Appointment apt=new Appointment();
+        apt.doctorName=doctorName;
+        List<Appointment> aptDetail =new ArrayList<>();
+        File file=new File(path+"Appointment"+".json");
+        readFromFile(file,(List<T>) aptDetail,Appointment.class);
+        if(have(aptDetail,apt.doctorName))
+        {
+     	   int idx=getIdx(aptDetail,doctorName);
+     	   if(aptDetail.get(idx).patientName.size()==5)
+     	   {
+     		   System.out.println("Doctor is not availble select other one");
+     		   return;
+     	   }
+     	   aptDetail.get(idx).patientName.add(pr);
+        }
+     	else
+     	   {
+     		  Appointment patientApt= new Appointment();
+     		  List<PatientInfo> ptr=new ArrayList<>();
+     		  ptr.add(pr);
+     		  patientApt.setDoctorName(apt.doctorName);
+     		  patientApt.setPatientName(ptr);
+     		  aptDetail.add(patientApt);
+     		  
+     	   }
+     	   File fileName1=new File("C:\\Users\\1022784\\Desktop\\JavaPrograms\\StakeHolder\\Appointment.json");
+     	   try {
+			writeToFile(fileName1,(List<T>) aptDetail,Appointment.class);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+    }
 
-	int getIdx(List<Appointment> list , DoctorInfo doctorName)
+
+	private int getIdx(List<Appointment> list , DoctorInfo doctorName)
 	{
 		for(int i=0;i<list.size();i++)
 		{
@@ -185,7 +205,7 @@ public class ClinicUser<T> {
 		get.sc.nextLine();
 		switch(opt)
 		{
-		case 1:searchPatientByName(  patientInfo);break;
+		case 1:searchPatientByName(patientInfo);break;
 		case 2:searchPatientById(patientInfo);break;
 		case 3:searchPatientBYMobNum(patientInfo);break;
 		default:
@@ -193,7 +213,7 @@ public class ClinicUser<T> {
 		}
 		
 	}
-	private void searchInPatient(List<PatientInfo> patientInfo, String val, String string) {
+	private int searchInPatient(List<PatientInfo> patientInfo, String val, String string,boolean print) {
 		boolean found=false; 
 		int i;
 		for( i=0;i<patientInfo.size();i++)
@@ -207,13 +227,18 @@ public class ClinicUser<T> {
 	}
 		if(found)
 		{
+			if(print)
+			{
 			System.out.println("Data Found for Patient............................................................");
 			System.out.println("Patient Name                            :"+ patientInfo.get(i).getPatientName()
 					               +"\n" +"Patient Id                                  :" + patientInfo.get(i).getId()
 					               +"\n" +"Patient Mobile Number          :" + patientInfo.get(i).getMobileNumber());
+			}
+			return i;
 		}
-		else
+		if(print && !found)
 			System.out.println("data not found");
+		return -1;
 	}
 	private void searchInDoctor(List<DoctorInfo> doctorInfo, String val, String string) {
 		boolean found=false;
@@ -241,19 +266,19 @@ public class ClinicUser<T> {
 	{
 		System.out.println("Enter the Id");
 		String val= get.sc.nextLine();
-	    searchInPatient(patientInfo,val,"ById");
+	    searchInPatient(patientInfo,val,"ById",true);
 	}
 	private void searchPatientBYMobNum(List<PatientInfo>  patientInfo)
 	{
 		System.out.println("Enter the Mobile Number");
 		String val= get.sc.nextLine();
-	    searchInPatient(patientInfo,val,"ByMobNum");
+	    searchInPatient(patientInfo,val,"ByMobNum",true);
 	}
 	private void searchPatientByName(List<PatientInfo>  patientInfo)
 	{
 		System.out.println("Enter the name");
 		String val= get.sc.nextLine();
-	    searchInPatient(patientInfo,val,"ByName");
+	    searchInPatient(patientInfo,val,"ByName",true);
 	}
 	
 	private void searchDoctorById(List<DoctorInfo>  doctorInfo)
@@ -291,6 +316,28 @@ public class ClinicUser<T> {
 			System.out.println("worng entry");
 		}
 	
+		// TODO Auto-generated method stub
+		
+	}
+	/*public static void addEntry() {
+		System.out.println("1.Add entry for doctor " + "\n" +"2.Add entry for patient");
+		int opt=get.sc.nextInt();
+		try {
+		switch(opt)
+		{
+		case 1:addDoctorDetail();break;
+		case 2:addPatientDetailIntoFile();break;
+		default:System.out.println("Wrong entry.............");return;
+		}
+		// TODO Auto-generated method stub
+		
+	}
+		catch(Exception e)
+		{
+			System.out.println("Unable to add entry");
+		}
+}*/
+	private static void addPatientDetailIntoFile() {
 		// TODO Auto-generated method stub
 		
 	}
